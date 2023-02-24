@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS arrays;
+CREATE TABLE arrays (  
+id INT PRIMARY KEY, 
+input_array VARCHAR(20) NOT NULL
+);

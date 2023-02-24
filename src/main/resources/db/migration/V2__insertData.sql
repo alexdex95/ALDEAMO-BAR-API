@@ -1,0 +1,6 @@
+INSERT INTO arrays VALUES(1, '2,4,5,6,7,8');
+INSERT INTO arrays VALUES(2, '3,7,9,5,4,2');
+INSERT INTO arrays VALUES(3, '5,7,9,11,13');
+INSERT INTO arrays VALUES(4, '6,4,2,12,15');
+INSERT INTO arrays VALUES(5, '7,10,15,11,9');
+INSERT INTO arrays VALUES(6, '2,3,4,5,6,7');
