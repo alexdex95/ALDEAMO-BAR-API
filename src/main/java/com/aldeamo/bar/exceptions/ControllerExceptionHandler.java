@@ -1,5 +1,6 @@
 package com.aldeamo.bar.exceptions;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
@@ -25,5 +26,12 @@ public class ControllerExceptionHandler {
 		ErrorObject eObject = new ErrorObject.ErrorObjectBuilder().status(HttpStatus.BAD_REQUEST.value())
 				.message(ex.getMessage()).timestamp(LocalDateTime.now()).builder();
 		return new ResponseEntity<>(eObject, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<ErrorObject> handleResourceNotFoundException(SQLException ex) {
+		ErrorObject eObject = new ErrorObject.ErrorObjectBuilder().status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.message(ex.getMessage()).timestamp(LocalDateTime.now()).builder();
+		return new ResponseEntity<>(eObject, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

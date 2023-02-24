@@ -17,21 +17,23 @@ import com.aldeamo.bar.services.ApiRestI;
 @Service
 public class ApiRestImplement implements ApiRestI {
 
+	protected final int[] numbersPrimos = { 2, 3, 5, 7, 11, 13, 17 };
+
 	@Autowired
 	ArraysRepository arraysRepository;
 
 	/**
-    *
-    * Description: metodo que realiza las iteraciones de los numeros;
-    *
-	* @param numero de iteraciones a realizar (Q)
-	* @param representa id de la pila en base de datos
-    * @return retorna una lista con los numeros iterados acumulados
-    * @Throw ResponseStatusException datos incorrectos
-    * */
+	 *
+	 * Description: metodo que realiza las iteraciones de los numeros;
+	 *
+	 * @param numero     de iteraciones a realizar (Q)
+	 * @param representa id de la pila en base de datos
+	 * @return retorna una lista con los numeros iterados acumulados
+	 * @Throw ResponseStatusException datos incorrectos
+	 */
 	@Override
-	public List<Integer> get(int iterations, Integer dataID) {
-		if (dataID.intValue() > 6 || dataID.intValue() < 0) {
+	public List<Integer> get(int iterations, int dataID) {
+		if (dataID > 6 || dataID < 0) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "VALOR DE dataID NO CUMPLE CON LAS CONDICIONES");
 		}
 		DataService dataService = new DataService();
@@ -40,7 +42,7 @@ public class ApiRestImplement implements ApiRestI {
 			Collections.reverse(dataService.getNumbersIterations());
 			dataService.getDivisiblenumbers().clear();
 			for (int index = 0; index < dataService.getNumbersIterations().size(); index++) {
-				if (dataService.getNumbersIterations().get(index) % NUMEROSPRIMOS[numIter - 1] == 0) {
+				if (dataService.getNumbersIterations().get(index) % numbersPrimos[numIter - 1] == 0) {
 					dataService.getDivisiblenumbers().add(dataService.getNumbersIterations().get(index));
 				} else {
 					dataService.getNonDivisibleNumbers().add(dataService.getNumbersIterations().get(index));
@@ -60,14 +62,14 @@ public class ApiRestImplement implements ApiRestI {
 	}
 
 	/**
-    *
-    * Description: metodo de busqueda por id en tabla arrays;
-    *
-    * @param id  para realizar la busqueda en base de datos
-    * @return retorna objeto ArraysObject con informacion de base de datos
-    * @Throw ResponseStatusException contenido no encontrado
-    * */
-	public List<Integer> databaseQuery(Integer dataID) {
+	 *
+	 * Description: metodo de busqueda por id en tabla arrays;
+	 *
+	 * @param id para realizar la busqueda en base de datos
+	 * @return retorna objeto ArraysObject con informacion de base de datos
+	 * @Throw ResponseStatusException contenido no encontrado
+	 */
+	public List<Integer> databaseQuery(int dataID) {
 		Optional<ArraysObject> tablaArrays = arraysRepository.findById(Integer.toString(dataID));
 		if (tablaArrays.isPresent()) {
 			return tablaArrays.get().getStackAsNumbers();
