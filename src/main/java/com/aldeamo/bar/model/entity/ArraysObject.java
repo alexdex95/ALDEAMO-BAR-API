@@ -48,6 +48,11 @@ public class ArraysObject {
 		this.numbers = numbers;
 	}
 
+	/**
+	 * Metodo para organizar los datos de la base de datos.
+	 * 
+	 * @return lista de numeros luego de hacerle split
+	 */
 	@JsonIgnore
 	public List<Integer> getStackAsNumbers() {
 

@@ -20,6 +20,15 @@ public class ApiRestImplement implements ApiRestI {
 	@Autowired
 	ArraysRepository arraysRepository;
 
+	/**
+    *
+    * Description: metodo que realiza las iteraciones de los numeros;
+    *
+	* @param numero de iteraciones a realizar (Q)
+	* @param representa id de la pila en base de datos
+    * @return retorna una lista con los numeros iterados acumulados
+    * @Throw ResponseStatusException datos incorrectos
+    * */
 	@Override
 	public List<Integer> get(int iterations, Integer dataID) {
 		if (dataID.intValue() > 6 || dataID.intValue() < 0) {
@@ -50,6 +59,14 @@ public class ApiRestImplement implements ApiRestI {
 
 	}
 
+	/**
+    *
+    * Description: metodo de busqueda por id en tabla arrays;
+    *
+    * @param id  para realizar la busqueda en base de datos
+    * @return retorna objeto ArraysObject con informacion de base de datos
+    * @Throw ResponseStatusException contenido no encontrado
+    * */
 	public List<Integer> databaseQuery(Integer dataID) {
 		Optional<ArraysObject> tablaArrays = arraysRepository.findById(Integer.toString(dataID));
 		if (tablaArrays.isPresent()) {
