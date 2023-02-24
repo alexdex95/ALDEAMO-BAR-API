@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.aldeamo.bar.services.implementations.ApiRestImplement;
 
 @RestController
-@RequestMapping(path = "${context.path}")
+@RequestMapping(path = "/V1/API/")
 public class ApiRestController {
 
 	@Autowired
